@@ -4,9 +4,16 @@
 
 // Create map
 const myMap = L.map('map').setView([48.868672, 2.342130], 12);
-
-
-
+myMap.on('click', function(e) {
+    // Get the coordinates of the clicked point.
+    const latlng = e.latlng;
+  
+    // Create a popup with the coordinates.
+    const popup = L.popup().setContent(`Coordinates: ${latlng.lat}, ${latlng.lng}`);
+  
+    // Open the popup at the clicked point.
+    popup.openOn(myMap);
+  });
 // Add openstreetmap tiles
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -39,6 +46,7 @@ let redIcon = L.icon({
     iconUrl: '/assets/red-pin.png',
     iconSize: [38, 38],
    iconAnchor: [19, 38],
+   popupAnchor: [0, -25]
 })
 // Metro station markers
 const rS = L.marker([48.866200610611926, 2.352236247419453], {icon: redIcon}).bindPopup('Réaumur-Sébastopol')
